@@ -2,12 +2,13 @@
 
 import { updateEntry } from '@/utils/api';
 import { useState } from 'react';
-import { useAutosave } from 'react-autosave';
 
 const Editor = ({ entry }) => {
   const [value, setValue] = useState(entry.content);
   const [isLoading, setIsLoading] = useState(false);
   const [analysis, setAnalysis] = useState(entry.analysis);
+
+  let saveBtnTxt = isLoading ? 'Saving...' : 'Save Entry';
 
   const { mood, summary, color, subject, negative } = analysis;
   const analysisData = [
@@ -17,25 +18,34 @@ const Editor = ({ entry }) => {
     { name: 'Negative', value: negative ? 'True' : 'False' },
   ];
 
-  useAutosave({
-    data: value,
-    onSave: async (_value) => {
-      setIsLoading(true);
-      const data = await updateEntry(entry.id, _value);
+  const handleSave = async () => {
+    setIsLoading(true);
+    try {
+      const data = await updateEntry(entry.id, value);
       setAnalysis(data.analysis);
+    } catch (error) {
+      // Handle error here (e.g., show error message to the user)
+      console.error('Failed to save entry:', error);
+    } finally {
       setIsLoading(false);
-    },
-  });
+    }
+  };
 
   return (
     <div className="w-full h-full grid grid-cols-3">
       <div className="col-span-2">
-        {isLoading && <div>...loading</div>}
         <textarea
-          className="w-full h-full p-8 text-xl outline-none"
+          className="w-full h-2/3 p-8 text-xl outline-none"
           value={value}
           onChange={(e) => setValue(e.target.value)}
         />
+        <button
+          className="mx-8 my-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          onClick={handleSave}
+          disabled={isLoading}
+        >
+          {saveBtnTxt}
+        </button>
       </div>
 
       <div className="border-l border-black/10">
