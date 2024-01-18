@@ -11,6 +11,9 @@ const getEntries = async () => {
     where: {
       userId: user.id,
     },
+    include: {
+      analysis: true,
+    },
     orderBy: {
       createdAt: 'desc',
     },
