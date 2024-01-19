@@ -1,7 +1,7 @@
 import { UserButton } from '@clerk/nextjs';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ModeToggle } from '@/components/ui/modeToggle';
+import { ModeToggle } from '@/components/ui/ModeToggle';
 
 const links = [
   { name: 'Journal', href: '/journal' },
