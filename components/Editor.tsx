@@ -2,6 +2,8 @@
 
 import { updateEntry } from '@/utils/api';
 import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
 
 const Editor = ({ entry }) => {
   const [value, setValue] = useState(entry.content);
@@ -34,18 +36,18 @@ const Editor = ({ entry }) => {
   return (
     <div className="w-full h-full grid grid-cols-3">
       <div className="col-span-2">
-        <textarea
-          className="w-full h-2/3 p-8 text-xl outline-none"
+        <Textarea
+          className="w-[97%] h-2/3 m-2 p-4 text-lg outline-none"
           value={value}
           onChange={(e) => setValue(e.target.value)}
         />
-        <button
-          className="mx-8 my-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        <Button
+          className="mx-2"
           onClick={handleSave}
           disabled={isLoading}
         >
           {saveBtnTxt}
-        </button>
+        </Button>
       </div>
 
       <div className="border-l border-black/10">
