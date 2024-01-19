@@ -42,3 +42,18 @@ export const askQuestion = async (question) => {
     return data.data;
   }
 };
+
+export const deleteEntry = async (id) => {
+  const res = await fetch(
+    new Request(createURL(`/api/journal/${id}`), {
+      method: 'DELETE',
+    })
+  );
+
+  if (res.ok) {
+    const data = await res.json();
+    return data.data;
+  } else {
+    throw new Error('Something went wrong on API server!');
+  }
+};

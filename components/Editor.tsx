@@ -1,14 +1,32 @@
 'use client';
 
-import { updateEntry } from '@/utils/api';
+import { updateEntry, deleteEntry } from '@/utils/api';
 import { useState } from 'react';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
+import { useRouter } from 'next/navigation';
 
 const Editor = ({ entry }) => {
   const [value, setValue] = useState(entry.content);
   const [isLoading, setIsLoading] = useState(false);
   const [analysis, setAnalysis] = useState(entry.analysis);
+  const router = useRouter();
+
+  const handleDelete = async () => {
+    await deleteEntry(entry.id);
+    router.push('/journal');
+  };
 
   let saveBtnTxt = isLoading ? 'Saving...' : 'Save Entry';
 
@@ -41,13 +59,45 @@ const Editor = ({ entry }) => {
           value={value}
           onChange={(e) => setValue(e.target.value)}
         />
-        <Button
-          className="mx-2"
-          onClick={handleSave}
-          disabled={isLoading}
-        >
-          {saveBtnTxt}
-        </Button>
+        <div className="flex justify-between">
+          <Button
+            className="mx-2"
+            onClick={handleSave}
+            disabled={isLoading}
+          >
+            {saveBtnTxt}
+          </Button>
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button
+                variant="outline"
+                disabled={isLoading}
+              >
+                Delete
+              </Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                <AlertDialogDescription>
+                  This action cannot be undone. The entry will be permanently
+                  deleted.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel className="mt-6">Cancel</AlertDialogCancel>
+                <AlertDialogAction asChild>
+                  <Button
+                    onClick={handleDelete}
+                    disabled={isLoading}
+                  >
+                    Continue
+                  </Button>
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+        </div>
       </div>
 
       <div className="border-l border-black/10">

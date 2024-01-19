@@ -2,6 +2,7 @@ import { analyze } from '@/utils/ai';
 import { getUserByClerkId } from '@/utils/auth';
 import { prisma } from '@/utils/db';
 import { NextResponse } from 'next/server';
+import { update } from '@/utils/actions';
 
 export const PATCH = async (request: Request, { params }) => {
   const { content } = await request.json();
@@ -32,5 +33,24 @@ export const PATCH = async (request: Request, { params }) => {
     update: analysis,
   });
 
+  update(['/journal']);
+
   return NextResponse.json({ data: { ...updatedEntry, analysis: updated } });
+};
+
+export const DELETE = async (request: Request, { params }) => {
+  const user = await getUserByClerkId();
+
+  await prisma.journalEntry.delete({
+    where: {
+      userId_id: {
+        id: params.id,
+        userId: user.id,
+      },
+    },
+  });
+
+  update(['/journal']);
+
+  return NextResponse.json({ data: { id: params.id } });
 };

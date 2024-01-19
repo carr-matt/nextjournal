@@ -3,7 +3,7 @@ import { OpenAIEmbeddings } from '@langchain/openai';
 import { z } from 'zod';
 import { StructuredOutputParser } from 'langchain/output_parsers';
 import { PromptTemplate } from '@langchain/core/prompts';
-import { Document } from 'langchain/document';
+import { Document } from '@langchain/core/documents';
 import { loadQARefineChain } from 'langchain/chains';
 import { MemoryVectorStore } from 'langchain/vectorstores/memory';
 
