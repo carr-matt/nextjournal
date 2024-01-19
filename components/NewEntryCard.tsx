@@ -2,6 +2,7 @@
 
 import { createNewEntry } from '@/utils/api';
 import { useRouter } from 'next/navigation';
+import { Card, CardHeader, CardTitle } from '@/components/ui/card';
 
 const NewEntryCard = () => {
   const router = useRouter();
@@ -12,14 +13,14 @@ const NewEntryCard = () => {
   };
 
   return (
-    <div className="cursor-pointer overflow-hidden rounded-lg bg-white shadow">
-      <div
-        className="px-4 py-5 sm:p-6"
-        onClick={handleOnClick}
-      >
-        <span className="text-3xl">New Entry</span>
-      </div>
-    </div>
+    <Card
+      className="cursor-pointer"
+      onClick={handleOnClick}
+    >
+      <CardHeader>
+        <CardTitle>New Entry</CardTitle>
+      </CardHeader>
+    </Card>
   );
 };
 

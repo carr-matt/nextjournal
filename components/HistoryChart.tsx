@@ -19,7 +19,7 @@ const CustomTooltip = ({ payload, label, active }) => {
           className="absolute left-2 top-2 w-2 h-2 rounded-full"
           style={{ background: analysis.color }}
         ></div>
-        <p className="label text-sm text-black/30">{dateLabel}</p>
+        <p className="label text-sm text-muted-foreground">{dateLabel}</p>
         <p className="intro text-xl uppercase">{analysis.mood}</p>
       </div>
     );

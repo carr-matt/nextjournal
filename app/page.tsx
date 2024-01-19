@@ -8,7 +8,7 @@ export default async function Home() {
   let href = userId ? '/journal' : '/new-user';
 
   return (
-    <main className="w-screen h-screen flex justify-center items-center p-4 sm:p-6 md:p-8 bg-slate-100">
+    <main className="w-screen h-screen flex justify-center items-center p-4 sm:p-6 md:p-8">
       <div className="w-full max-w-[600px] lg:max-w-[800px] mx-auto text-left">
         <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl mb-4 md:mb-6 font-extrabold tracking-tight scroll-m-20 mx-auto">
           A Journal App

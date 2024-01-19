@@ -24,11 +24,14 @@ const getData = async () => {
 const History = async () => {
   const { analyses, avg } = await getData();
   return (
-    <div className="h-full px-6 py-8">
+    <div className="h-full p-8">
+      <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
+        History
+      </h2>
       <div>
-        <h1 className="text-2xl mb-4">{`Average Sentiment Score: ${avg}`}</h1>
+        <h3 className="scroll-m-20 text-2xl font-semibold tracking-tight my-4">{`Average Sentiment Score: ${avg}`}</h3>
       </div>
-      <div className="h-[90%] w-[90%]">
+      <div className="h-[90%] w-full">
         <HistoryChart data={analyses} />
       </div>
     </div>
