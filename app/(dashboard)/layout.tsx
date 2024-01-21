@@ -15,7 +15,7 @@ const DashboardLayout = ({ children }) => {
       <div className="h-full">
         <header className="h-[80px] border-b border-black/10">
           <div className="h-full w-full px-6 flex items-center justify-between">
-            <UserButton />
+            <UserButton afterSignOutUrl="/" />
             <nav className="flex flex-row mx-3 gap-4">
               {links.map((link) => (
                 <Button
