@@ -4,6 +4,8 @@ import { askQuestion } from '@/utils/api';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { MessageCircleQuestion } from 'lucide-react';
 
 const Question = () => {
   const [value, setValue] = useState('');
@@ -35,15 +37,15 @@ const Question = () => {
           disabled={loading}
           onChange={onChange}
           value={value}
+          id="question"
           type="text"
-          placeholder="Ask a question"
-          // className="border border-black/20 px-4 py-2 text-lg rounded-lg"
+          placeholder="Ask your Journal AI a question"
         />
         <Button
           disabled={loading}
           type="submit"
-          // className="bg-blue-400 px-4 py-2 rounded-lg text-lg"
         >
+          <MessageCircleQuestion className="mr-2 h-4 w-4" />
           Ask
         </Button>
       </form>
