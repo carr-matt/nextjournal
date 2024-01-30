@@ -44,9 +44,12 @@ const HistoryChart = ({ data }) => {
           dataKey="sentimentScore"
           stroke="#8884d8"
           strokeWidth={2}
-          activeDot={{ r: 8 }}
+          activeDot={{ r: 4 }}
         />
-        <XAxis dataKey="createdAt" />
+        <XAxis
+          dataKey="createdAt"
+          className="text-sm font-medium leading-none"
+        />
         <Tooltip content={<CustomTooltip />} />
       </LineChart>
     </ResponsiveContainer>

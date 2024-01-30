@@ -2,6 +2,7 @@ import { UserButton } from '@clerk/nextjs';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ModeToggle } from '@/components/ui/ModeToggle';
+import { Separator } from '@/components/ui/separator';
 
 const links = [
   { name: 'Journal', href: '/journal' },
@@ -13,7 +14,7 @@ const DashboardLayout = ({ children }) => {
   return (
     <div className="h-screen w-screen relative">
       <div className="h-full">
-        <header className="h-[80px] border-b border-black/10">
+        <header className="h-[80px]">
           <div className="h-full w-full px-6 flex items-center justify-between">
             <UserButton afterSignOutUrl="/" />
             <nav className="flex flex-row mx-3 gap-4">
@@ -29,6 +30,7 @@ const DashboardLayout = ({ children }) => {
             </nav>
             <ModeToggle />
           </div>
+          <Separator />
         </header>
         <div className="h-[calc(100vh-80px)]">{children}</div>
       </div>
