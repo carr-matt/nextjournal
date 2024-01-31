@@ -4,6 +4,8 @@ import { getUserByClerkId } from '@/utils/auth';
 import { prisma } from '@/utils/db';
 import Link from 'next/link';
 import Question from '@/components/Question';
+import { Suspense } from 'react';
+import Loading from './loading';
 
 const getEntries = async () => {
   const user = await getUserByClerkId();
@@ -34,14 +36,16 @@ const JournalPage = async () => {
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
         <NewEntryCard />
-        {entries.map((entry) => (
-          <Link
-            href={`/journal/${entry.id}`}
-            key={entry.id}
-          >
-            <EntryCard entry={entry} />
-          </Link>
-        ))}
+        <Suspense fallback={<Loading />}>
+          {entries.map((entry) => (
+            <Link
+              href={`/journal/${entry.id}`}
+              key={entry.id}
+            >
+              <EntryCard entry={entry} />
+            </Link>
+          ))}
+        </Suspense>
       </div>
     </div>
   );
