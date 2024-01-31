@@ -16,6 +16,15 @@ import {
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { useRouter } from 'next/navigation';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table';
 
 const Editor = ({ entry }) => {
   const [value, setValue] = useState(entry.content);
@@ -32,8 +41,8 @@ const Editor = ({ entry }) => {
 
   const { mood, summary, color, subject, negative } = analysis;
   const analysisData = [
-    { name: 'Summary', value: summary },
     { name: 'Subject', value: subject },
+    { name: 'Summary', value: summary },
     { name: 'Mood', value: mood },
     { name: 'Negative', value: negative ? 'True' : 'False' },
   ];
@@ -51,17 +60,20 @@ const Editor = ({ entry }) => {
     }
   };
 
+  const date = new Date(analysis.updatedAt).toDateString();
+  const time = new Date(analysis.updatedAt).toLocaleTimeString();
+  const moodColor = analysis.color;
+
   return (
-    <div className="w-full h-full grid grid-cols-3">
-      <div className="col-span-2">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div className="h-max sm:h-4/5 md:col-span-2 m-6">
         <Textarea
-          className="w-[97%] h-2/3 m-2 p-4 text-lg outline-none"
+          className="h-max sm:h-4/5 p-4 text-lg outline-none"
           value={value}
           onChange={(e) => setValue(e.target.value)}
         />
-        <div className="flex justify-between">
+        <div className="flex justify-between my-2">
           <Button
-            className="mx-2"
             onClick={handleSave}
             disabled={isLoading}
           >
@@ -100,27 +112,33 @@ const Editor = ({ entry }) => {
         </div>
       </div>
 
-      <div className="border-l border-black/10">
-        <div
-          className="px-6 py-10"
-          style={{ backgroundColor: color }}
-        >
-          <h2 className="text-2xl">Analysis</h2>
-        </div>
-        <div>
-          <ul>
-            {analysisData.map((item) => (
-              <li
-                key={item.name}
-                className="flex p-3 items-center border-b border-black/10 justify-between"
-              >
-                <span className="text-lg font-semibold">{item.name}</span>
-                <span>{item.value}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
+      <Card className="m-6">
+        <CardHeader>
+          <CardTitle className="text-center">Analysis</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Table>
+            <TableBody>
+              {analysisData.map((item) => (
+                <TableRow key={item.name}>
+                  <TableCell className="font-medium">{item.name}</TableCell>
+                  <TableCell>{item.value}</TableCell>
+                </TableRow>
+              ))}
+              <TableRow>
+                <TableCell className="font-medium">Mood Color</TableCell>
+                <TableCell
+                  style={{ backgroundColor: moodColor, color: moodColor }}
+                  className="rounded-full font-extrabold text-center bg-clip-content"
+                >
+                  {analysis.color}
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </CardContent>
+        <CardFooter>{`Updated: ${time} ${date}`}</CardFooter>
+      </Card>
     </div>
   );
 };
