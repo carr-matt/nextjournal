@@ -1,5 +1,4 @@
 import EntryCard from '@/components/EntryCard';
-import NewEntryCard from '@/components/NewEntryCard';
 import { getUserByClerkId } from '@/utils/auth';
 import { prisma } from '@/utils/db';
 import Link from 'next/link';
@@ -46,7 +45,6 @@ const JournalPage = async () => {
         </Link>
       </Button>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mt-8 mb-16">
-        {/* <NewEntryCard /> */}
         <Suspense fallback={<Loading />}>
           {entries.map((entry) => (
             <Link

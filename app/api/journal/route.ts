@@ -1,15 +1,20 @@
 import { analyze } from '@/utils/ai';
 import { getUserByClerkId } from '@/utils/auth';
 import { prisma } from '@/utils/db';
+import { revalidatePath } from 'next/cache';
 import { NextResponse } from 'next/server';
-import { update } from '@/utils/actions';
 
-export const POST = async () => {
+// Name function after the HTTP method it's handling
+export const POST = async (req: Request) => {
+  const data = await req.json();
+  console.log(data);
   const user = await getUserByClerkId();
+  const { content } = data;
+  console.log('Content to save:', { content });
   const entry = await prisma.journalEntry.create({
     data: {
       userId: user.id,
-      content: 'Write about your day!',
+      content: content,
     },
   });
 
@@ -22,7 +27,7 @@ export const POST = async () => {
     },
   });
 
-  update(['/journal']);
+  revalidatePath('/journal');
 
   return NextResponse.json({ data: entry });
 };

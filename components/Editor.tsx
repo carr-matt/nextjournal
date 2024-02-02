@@ -19,7 +19,6 @@ import { useRouter } from 'next/navigation';
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -27,7 +26,7 @@ import {
 import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table';
 
 const Editor = ({ entry }) => {
-  const [value, setValue] = useState(entry.content);
+  const [entryContent, setEntryContent] = useState(entry.content);
   const [isLoading, setIsLoading] = useState(false);
   const [analysis, setAnalysis] = useState(entry.analysis);
   const router = useRouter();
@@ -50,7 +49,7 @@ const Editor = ({ entry }) => {
   const handleSave = async () => {
     setIsLoading(true);
     try {
-      const data = await updateEntry(entry.id, value);
+      const data = await updateEntry(entry.id, entryContent);
       setAnalysis(data.analysis);
     } catch (error) {
       // Handle error here (e.g., show error message to the user)
@@ -69,8 +68,8 @@ const Editor = ({ entry }) => {
       <div className="h-max sm:h-4/5 md:col-span-2 m-6">
         <Textarea
           className="h-max sm:h-4/5 p-4 text-lg outline-none"
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
+          value={entryContent}
+          onChange={(e) => setEntryContent(e.target.value)}
         />
         <div className="flex justify-between my-2">
           <Button
@@ -103,7 +102,7 @@ const Editor = ({ entry }) => {
                     onClick={handleDelete}
                     disabled={isLoading}
                   >
-                    Continue
+                    Yep! Delete It
                   </Button>
                 </AlertDialogAction>
               </AlertDialogFooter>
