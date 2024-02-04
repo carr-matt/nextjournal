@@ -30,7 +30,6 @@ const NewEntry = () => {
     setIsLoading(true);
     try {
       const data = await newEntry(entryContent);
-      router.refresh();
       router.push(`/journal/${data.id}`);
     } catch (error) {
       console.error('Failed to save entry:', error);

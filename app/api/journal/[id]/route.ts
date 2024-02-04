@@ -2,7 +2,8 @@ import { analyze } from '@/utils/ai';
 import { getUserByClerkId } from '@/utils/auth';
 import { prisma } from '@/utils/db';
 import { NextResponse } from 'next/server';
-import { update } from '@/utils/actions';
+// import { update } from '@/utils/actions';
+import { revalidatePath } from 'next/cache';
 
 export const PATCH = async (request: Request, { params }) => {
   const { content } = await request.json();
@@ -33,7 +34,7 @@ export const PATCH = async (request: Request, { params }) => {
     update: analysis,
   });
 
-  update(['/journal']);
+  revalidatePath('/journal');
 
   return NextResponse.json({ data: { ...updatedEntry, analysis: updated } });
 };
@@ -50,7 +51,7 @@ export const DELETE = async (request: Request, { params }) => {
     },
   });
 
-  update(['/journal']);
+  revalidatePath('/journal');
 
   return NextResponse.json({ data: { id: params.id } });
 };

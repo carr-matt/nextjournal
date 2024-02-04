@@ -1,31 +1,31 @@
+'use client';
+
 import EntryCard from '@/components/EntryCard';
-import { getUserByClerkId } from '@/utils/auth';
-import { prisma } from '@/utils/db';
 import Link from 'next/link';
 import Question from '@/components/Question';
-import { Suspense } from 'react';
+import { useState, useEffect } from 'react';
 import Loading from './loading';
 import { Pencil } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { getEntries } from '@/utils/api';
 
-const getEntries = async () => {
-  const user = await getUserByClerkId();
-  const entries = await prisma.journalEntry.findMany({
-    where: {
-      userId: user.id,
-    },
-    include: {
-      analysis: true,
-    },
-    orderBy: {
-      createdAt: 'desc',
-    },
-  });
-  return entries;
-};
+const JournalPage = () => {
+  const [entries, setEntries] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-const JournalPage = async () => {
-  const entries = await getEntries();
+  useEffect(() => {
+    const fetchEntries = async () => {
+      const fetchedEntries = await getEntries();
+      setEntries(fetchedEntries);
+      setLoading(false);
+    };
+
+    fetchEntries();
+  }, []);
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div className="p-8 h-full">
@@ -45,16 +45,14 @@ const JournalPage = async () => {
         </Link>
       </Button>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mt-8 mb-16">
-        <Suspense fallback={<Loading />}>
-          {entries.map((entry) => (
-            <Link
-              href={`/journal/${entry.id}`}
-              key={entry.id}
-            >
-              <EntryCard entry={entry} />
-            </Link>
-          ))}
-        </Suspense>
+        {entries.map((entry) => (
+          <Link
+            href={`/journal/${entry.id}`}
+            key={entry.id}
+          >
+            <EntryCard entry={entry} />
+          </Link>
+        ))}
       </div>
     </div>
   );
