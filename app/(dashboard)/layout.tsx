@@ -15,9 +15,9 @@ const DashboardLayout = ({ children }) => {
     <div className="h-screen w-screen relative">
       <div className="h-full">
         <header className="h-[80px]">
-          <div className="h-full w-full px-6 flex items-center justify-between">
+          <div className="h-full w-full px-3 sm:px-6 flex items-center justify-between">
             <UserButton afterSignOutUrl="/" />
-            <nav className="flex flex-row mx-3 gap-4">
+            <nav className="flex flex-row mx-1 sm:mx-3 gap-2 sm:gap-4">
               {links.map((link) => (
                 <Button
                   asChild

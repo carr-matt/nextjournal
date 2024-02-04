@@ -8,6 +8,7 @@ import Loading from './loading';
 import { Pencil } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { getEntries } from '@/utils/api';
+import { Separator } from '@/components/ui/separator';
 
 const JournalPage = () => {
   const [entries, setEntries] = useState([]);
@@ -28,11 +29,12 @@ const JournalPage = () => {
   }
 
   return (
-    <div className="p-8 h-full">
-      <h2 className="border-b pb-2 text-3xl font-semibold tracking-tight">
+    <div className="p-2 sm:p-8 h-full">
+      <h2 className="pb-2 text-2xl sm:text-3xl font-semibold tracking-tight">
         Journal
       </h2>
-      <div className="my-8">
+      <Separator />
+      <div className="my-4 sm:my-8">
         <Question />
       </div>
       <Button
@@ -44,7 +46,7 @@ const JournalPage = () => {
           New Entry
         </Link>
       </Button>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 mt-8 mb-16">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-4 mt-4 sm:mt-8 mb-16">
         {entries.map((entry) => (
           <Link
             href={`/journal/${entry.id}`}

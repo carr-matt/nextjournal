@@ -39,7 +39,8 @@ const Question = () => {
           value={value}
           id="question"
           type="text"
-          placeholder="Ask your Journal AI a question"
+          placeholder="Ask your Journal AI a question..."
+          className="placeholder:italic"
         />
         <Button
           disabled={loading}

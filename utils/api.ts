@@ -3,6 +3,7 @@ const createURL = (path: string) => {
 };
 
 export const updateEntry = async (id: string, content: string) => {
+  // throw new Error('Test error');
   const res = await fetch(
     new Request(createURL(`/api/journal/${id}`), {
       method: 'PATCH',
