@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/popover';
 
 const getData = async () => {
-  const user = await getUserByClerkId;
+  const user = await getUserByClerkId();
   const analyses = await prisma.analysis.findMany({
     where: {
       userId: user.id,
