@@ -81,6 +81,7 @@ const Editor = ({ entry }) => {
     } finally {
       setIsLoading(false);
       router.refresh();
+      toast({ description: 'Your entry has been updated.' });
     }
   };
 
