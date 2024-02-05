@@ -28,7 +28,25 @@ const getEntry = async (id: string) => {
 };
 
 const EntryPage: React.FC<EntryPageProps> = async ({ params }) => {
-  const entry = await getEntry(params.id);
+  let entry;
+  try {
+    entry = await getEntry(params.id);
+  } catch (error) {
+    console.error('Failed to get entry due to an error', error);
+    return (
+      <div className="w-full h-full p-1 sm:px-8">
+        <Alert className="mx-auto my-20 max-w-[500px]">
+          <AlertCircle className="h-4 w-4" />
+          <AlertTitle>Failed to get entry</AlertTitle>
+          <AlertDescription>
+            We couldn&apos;t get the entry you were looking for.
+            <br />
+            Please try again.
+          </AlertDescription>
+        </Alert>
+      </div>
+    );
+  }
 
   if (!entry) {
     return (

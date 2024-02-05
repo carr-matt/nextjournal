@@ -2,7 +2,6 @@ import { analyze } from '@/utils/ai';
 import { getUserByClerkId } from '@/utils/auth';
 import { prisma } from '@/utils/db';
 import { NextResponse } from 'next/server';
-// import { update } from '@/utils/actions';
 import { revalidatePath } from 'next/cache';
 
 export const PATCH = async (request: Request, { params }) => {
