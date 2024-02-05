@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -19,6 +19,7 @@ import { newEntry } from '@/utils/api';
 import { useToast } from '@/components/ui/use-toast';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
+import { ToastAction } from '@/components/ui/toast';
 
 const NewEntry = () => {
   const [entryContent, setEntryContent] = useState('');
@@ -31,6 +32,13 @@ const NewEntry = () => {
     router.push('/journal');
   };
 
+  const handleEntryContentChange = useCallback(
+    (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+      setEntryContent(e.target.value);
+    },
+    []
+  );
+
   const handleSave = async () => {
     setIsLoading(true);
     try {
@@ -38,6 +46,19 @@ const NewEntry = () => {
       router.push(`/journal/${data.id}`);
     } catch (error) {
       console.error('Failed to save entry:', error);
+      toast({
+        variant: 'destructive',
+        title: 'Uh oh! Something went wrong.',
+        description: 'There was a problem saving your entry.',
+        action: (
+          <ToastAction
+            onClick={handleSave}
+            altText="Try again"
+          >
+            Try again
+          </ToastAction>
+        ),
+      });
     } finally {
       setIsLoading(false);
     }
@@ -69,7 +90,7 @@ const NewEntry = () => {
                 className="p-4 w-full h-full text-base sm:text-lg outline-none resize-none"
                 placeholder="Write about your day!"
                 value={entryContent}
-                onChange={(e) => setEntryContent(e.target.value)}
+                onChange={handleEntryContentChange}
               />
             </CardContent>
             <CardFooter className="flex justify-between sm:m-0">

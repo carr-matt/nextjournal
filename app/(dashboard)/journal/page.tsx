@@ -9,9 +9,10 @@ import { Pencil } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { getEntries } from '@/utils/api';
 import { Separator } from '@/components/ui/separator';
+import { JournalEntry } from '@/utils/types';
 
 const JournalPage = () => {
-  const [entries, setEntries] = useState([]);
+  const [entries, setEntries] = useState<JournalEntry[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

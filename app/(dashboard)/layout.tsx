@@ -3,6 +3,11 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ModeToggle } from '@/components/ui/ModeToggle';
 import { Separator } from '@/components/ui/separator';
+import { ReactNode } from 'react';
+
+interface DashboardLayoutProps {
+  children: ReactNode;
+}
 
 const links = [
   { name: 'Journal', href: '/journal' },
@@ -10,7 +15,7 @@ const links = [
   { name: 'Home', href: '/' },
 ];
 
-const DashboardLayout = ({ children }) => {
+const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
   return (
     <div className="h-screen w-screen relative">
       <div className="h-full">

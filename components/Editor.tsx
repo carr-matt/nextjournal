@@ -29,8 +29,13 @@ import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table';
 import { Separator } from './ui/separator';
 import { useToast } from './ui/use-toast';
 import { ToastAction } from './ui/toast';
+import { JournalEntry } from '@/utils/types';
 
-const Editor = ({ entry }) => {
+interface EditorProps {
+  entry: JournalEntry;
+}
+
+const Editor: React.FC<EditorProps> = ({ entry }) => {
   const [entryContent, setEntryContent] = useState(entry.content);
   const [isLoading, setIsLoading] = useState(false);
   const [analysis, setAnalysis] = useState(entry.analysis);
@@ -38,9 +43,12 @@ const Editor = ({ entry }) => {
   const router = useRouter();
   const { toast } = useToast();
 
-  const handleEntryContentChange = useCallback((e) => {
-    setEntryContent(e.target.value);
-  }, []);
+  const handleEntryContentChange = useCallback(
+    (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+      setEntryContent(e.target.value);
+    },
+    []
+  );
 
   const handleDelete = async () => {
     await deleteEntry(entry.id);
@@ -49,7 +57,7 @@ const Editor = ({ entry }) => {
 
   let saveBtnTxt = isLoading ? 'Saving...' : 'Save Changes';
 
-  const { mood, summary, color, subject, negative } = analysis;
+  const { mood, summary, color, subject, negative } = entry.analysis || {};
   const analysisData = [
     { name: 'Subject', value: subject },
     { name: 'Summary', value: summary },
@@ -62,7 +70,7 @@ const Editor = ({ entry }) => {
     try {
       const data = await updateEntry(entry.id, entryContent);
       setAnalysis(data.analysis);
-    } catch (err) {
+    } catch (err: unknown) {
       console.error('Failed to save entry:', error);
       setError(err.message);
       toast({
@@ -85,13 +93,15 @@ const Editor = ({ entry }) => {
     }
   };
 
-  const analysisDate = new Date(analysis.updatedAt).toDateString();
-  const analysisTime = new Date(analysis.updatedAt).toLocaleTimeString();
+  const analysisDate = new Date(entry.analysis?.updatedAt || '').toDateString();
+  const analysisTime = new Date(
+    entry.analysis?.updatedAt || ''
+  ).toLocaleTimeString();
   const entryDate = new Date(entry.createdAt).toDateString();
   const entryTime = new Date(entry.createdAt).toLocaleTimeString();
   const updatedDate = new Date(entry.updatedAt).toDateString();
   const updatedTime = new Date(entry.updatedAt).toLocaleTimeString();
-  const moodColor = analysis.color;
+  const moodColor = entry.analysis?.color || '';
 
   return (
     <div className="w-auto p-1 flex flex-col h-full">
@@ -186,7 +196,7 @@ const Editor = ({ entry }) => {
                         style={{ backgroundColor: moodColor, color: moodColor }}
                         className="rounded-full font-extrabold text-center bg-clip-content"
                       >
-                        {analysis.color}
+                        {entry.analysis?.color || ''}
                       </TableCell>
                     </TableRow>
                   </TableBody>
