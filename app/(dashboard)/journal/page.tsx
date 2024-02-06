@@ -47,7 +47,7 @@ const JournalPage = () => {
           New Entry
         </Link>
       </Button>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-4 mt-4 sm:mt-8 mb-16">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4 mt-4 sm:mt-8 mb-16">
         {entries.map((entry) => (
           <Link
             href={`/journal/${entry.id}`}
