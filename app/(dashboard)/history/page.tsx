@@ -8,6 +8,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
+import { Separator } from '@/components/ui/separator';
 
 const getData = async () => {
   const user = await getUserByClerkId();
@@ -32,9 +33,10 @@ const History = async () => {
   const { analyses, avg } = await getData();
   return (
     <div className="h-full p-8">
-      <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
+      <h2 className="pb-2 text-3xl font-semibold tracking-tight first:mt-0">
         History
       </h2>
+      <Separator />
       <div>
         <h3 className="scroll-m-20 text-xl sm:text-2xl font-semibold tracking-tight my-4">
           Average Sentiment Score
