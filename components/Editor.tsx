@@ -16,20 +16,14 @@ import {
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { useRouter } from 'next/navigation';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Table, TableBody, TableCell, TableRow } from '@/components/ui/table';
 import { Separator } from './ui/separator';
 import { useToast } from './ui/use-toast';
 import { ToastAction } from './ui/toast';
 import { JournalEntry } from '@/utils/types';
+import { Frown, Smile } from 'lucide-react';
 
 interface EditorProps {
   entry: JournalEntry;
@@ -57,13 +51,13 @@ const Editor: React.FC<EditorProps> = ({ entry }) => {
 
   let saveBtnTxt = isLoading ? 'Saving...' : 'Save Changes';
 
-  const { mood, summary, color, subject, negative } = entry.analysis || {};
+  const { subject, summary } = entry.analysis || {};
   const analysisData = [
     { name: 'Subject', value: subject },
     { name: 'Summary', value: summary },
-    { name: 'Mood', value: mood },
-    { name: 'Negative', value: negative ? 'True' : 'False' },
   ];
+
+  const negIcon = entry.analysis?.negative ? <Frown /> : <Smile />;
 
   const handleSave = async () => {
     setIsLoading(true);
@@ -106,7 +100,7 @@ const Editor: React.FC<EditorProps> = ({ entry }) => {
   return (
     <div className="w-auto p-1 flex flex-col h-full">
       <Tabs
-        defaultValue="entry"
+        defaultValue="analysis"
         className="max-w-[500px] w-full mx-auto my-1 sm:my-8 flex flex-col h-full"
       >
         <h2 className="pb-2 text-2xl sm:text-3xl font-semibold tracking-tight">
@@ -190,6 +184,13 @@ const Editor: React.FC<EditorProps> = ({ entry }) => {
                         <TableCell>{item.value}</TableCell>
                       </TableRow>
                     ))}
+                    <TableRow>
+                      <TableCell className="font-medium">Mood</TableCell>
+                      <TableCell className="flex flex-row justify-between">
+                        <span>{entry.analysis?.mood || ''}</span>
+                        <span>{negIcon || ''}</span>
+                      </TableCell>
+                    </TableRow>
                     <TableRow>
                       <TableCell className="font-medium">Mood Color</TableCell>
                       <TableCell
