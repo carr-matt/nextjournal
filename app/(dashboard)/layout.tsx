@@ -19,7 +19,10 @@ const links = [
 const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
   return (
     <>
-      <div className="h-screen w-screen relative">
+      <div
+        // vaul-drawer-wrapper=""
+        className="h-screen w-screen relative"
+      >
         <div className="h-full">
           <header className="h-[80px]">
             <div className="h-full w-full px-3 sm:px-6 flex items-center justify-between">

@@ -5,11 +5,11 @@ import Link from 'next/link';
 import Question from '@/components/Question';
 import { useState, useEffect } from 'react';
 import Loading from './loading';
-import { Pencil } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { getEntries } from '@/utils/api';
 import { Separator } from '@/components/ui/separator';
 import { JournalEntry } from '@/utils/types';
+import NewEntryButton from '@/components/NewEntryButton';
+import AiButton from '@/components/AiButton';
 
 const JournalPage = () => {
   const [entries, setEntries] = useState<JournalEntry[]>([]);
@@ -35,18 +35,9 @@ const JournalPage = () => {
         Journal
       </h2>
       <Separator />
-      <div className="my-4 sm:my-8">
-        <Question />
-      </div>
-      <Button
-        asChild
-        variant="default"
-      >
-        <Link href="/journal/new-entry">
-          <Pencil className="mr-2 h-4 w-4" />
-          New Entry
-        </Link>
-      </Button>
+      <div className="my-4 sm:my-8">{/* <Question /> */}</div>
+      <NewEntryButton />
+      <AiButton entries={entries} />
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4 mt-4 sm:mt-8 mb-16">
         {entries.map((entry) => (
           <Link
