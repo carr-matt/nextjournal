@@ -2,7 +2,6 @@
 
 import EntryCard from '@/components/EntryCard';
 import Link from 'next/link';
-import Question from '@/components/Question';
 import { useState, useEffect } from 'react';
 import Loading from './loading';
 import { getEntries } from '@/utils/api';
