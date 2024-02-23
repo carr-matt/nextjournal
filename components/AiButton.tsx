@@ -39,16 +39,14 @@ const AiButton = ({ entries }) => {
   };
 
   return (
-    <Drawer
-    // shouldScaleBackground
-    // snapPoints={[1]}
-    >
+    <Drawer>
       <DrawerTrigger>
         <Button
           variant="shine"
-          className="fixed bottom-4 left-4 rounded-full p-2 shadow-md z-20 shadow-violet-500 hover:shadow-violet-700 hover:scale-105 ease-in-out"
+          className="fixed bottom-4 left-4 rounded-full p-2 shadow-md z-20 shadow-violet-500 hover:shadow-violet-700 hover:scale-110 transition ease-out hover:ease-in"
         >
           <SparklesIcon />
+          <span className="sr-only">Journal AI</span>
         </Button>
       </DrawerTrigger>
       <DrawerContent className="max-w-xl">
@@ -85,7 +83,7 @@ const AiButton = ({ entries }) => {
           )}
           {loading && (
             <div className="mx-auto my-10">
-              <Loader2 className="w-16 h-16 animate-spin" />
+              <Loader2 className="size-16 animate-spin" />
             </div>
           )}
           {response && (

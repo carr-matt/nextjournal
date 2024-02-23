@@ -35,8 +35,9 @@ const JournalPage = () => {
         Journal
       </h2>
       <Separator />
-      <div className="my-4 sm:my-8">{/* <Question /> */}</div>
-      <NewEntryButton />
+      <div className="my-4 sm:my-8">
+        <NewEntryButton />
+      </div>
       <AiButton entries={entries} />
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4 mt-4 sm:mt-8 mb-16">
         {entries.map((entry) => (

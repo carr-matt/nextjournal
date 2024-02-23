@@ -11,6 +11,7 @@ import {
 import { Separator } from '@/components/ui/separator';
 import Link from 'next/link';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import NewEntryButton from '@/components/NewEntryButton';
 
 const getData = async () => {
   const user = await getUserByClerkId();
@@ -38,31 +39,22 @@ const History = async () => {
 
   if (isEmpty) {
     return (
-      <div className="h-full p-8">
-        <h2 className="pb-2 text-3xl font-semibold tracking-tight first:mt-0">
+      <div className="p-2 sm:p-8 h-full">
+        <h2 className="pb-2 text-2xl sm:text-3xl font-semibold tracking-tight">
           History
         </h2>
         <Separator />
         <div className="w-full h-full p-1 sm:px-8">
           <Alert className="mx-auto my-20 max-w-[500px]">
-            <AlertCircle className="h-4 w-4" />
+            <AlertCircle className="size-4" />
             <AlertTitle>No data to display</AlertTitle>
             <AlertDescription>
               Try adding some journal entries!
             </AlertDescription>
           </Alert>
           <div className="w-full flex flex-col items-center">
-            <ArrowDown className="h-8 w-8 animate-bounce" />
-            <Button
-              asChild
-              variant="default"
-              className=""
-            >
-              <Link href="/journal/new-entry">
-                <Pencil className="mr-2 h-4 w-4" />
-                New Entry
-              </Link>
-            </Button>
+            <ArrowDown className="size-8 animate-bounce" />
+            <NewEntryButton />
           </div>
         </div>
       </div>
@@ -70,8 +62,8 @@ const History = async () => {
   }
 
   return (
-    <div className="h-full p-8">
-      <h2 className="pb-2 text-3xl font-semibold tracking-tight first:mt-0">
+    <div className="p-2 sm:p-8 h-full">
+      <h2 className="pb-2 text-2xl sm:text-3xl font-semibold tracking-tight">
         History
       </h2>
       <Separator />

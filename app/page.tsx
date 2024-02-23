@@ -67,7 +67,7 @@ export default async function Home() {
                   alt="A dog named Maddy."
                   width="250"
                   height="250"
-                  className="h-24 w-24 sm:h-28 sm:w-28 md:h-32 md:w-32 lg:h-48 lg:w-48 rounded-full"
+                  className="size-24 sm:size-28 md:size-32 lg:size-48 rounded-full"
                 />
               </PopoverContent>
             </Popover>

@@ -36,7 +36,7 @@ const EntryPage: React.FC<EntryPageProps> = async ({ params }) => {
     return (
       <div className="w-full h-full p-1 sm:px-8">
         <Alert className="mx-auto my-20 max-w-[500px]">
-          <AlertCircle className="h-4 w-4" />
+          <AlertCircle className="size-4" />
           <AlertTitle>Failed to get entry</AlertTitle>
           <AlertDescription>
             We couldn&apos;t get the entry you were looking for.
@@ -52,7 +52,7 @@ const EntryPage: React.FC<EntryPageProps> = async ({ params }) => {
     return (
       <div className="w-full h-full p-1 sm:px-8">
         <Alert className="mx-auto my-20 max-w-[500px]">
-          <AlertCircle className="h-4 w-4" />
+          <AlertCircle className="size-4" />
           <AlertTitle>Entry not found</AlertTitle>
           <AlertDescription>
             We couldn&apos;t find the entry you were looking for.
