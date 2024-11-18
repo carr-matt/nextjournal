@@ -49,7 +49,7 @@ export default async function Home() {
           <p className="text-sm text-muted-foreground text-center border-t py-4">
             Created by{' '}
             <Link
-              href="https://www.linkedin.com/in/-matt-carr-/"
+              href="https://github.com/carr-matt"
               target="_blank"
               className="underline"
             >
