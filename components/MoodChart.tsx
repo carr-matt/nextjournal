@@ -28,7 +28,7 @@ const CustomTooltip = ({ payload, label, active }) => {
   return null;
 };
 
-const HistoryChart = ({ data }) => {
+const MoodChart = ({ data }) => {
   return (
     <ResponsiveContainer
       width="100%"
@@ -56,4 +56,4 @@ const HistoryChart = ({ data }) => {
   );
 };
 
-export default HistoryChart;
+export default MoodChart;

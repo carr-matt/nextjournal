@@ -1,4 +1,4 @@
-import HistoryChart from '@/components/HistoryChart';
+import MoodChart from '@/components/MoodChart';
 import { getUserByClerkId } from '@/utils/auth';
 import { prisma } from '@/utils/db';
 import { AlertCircle, ArrowDown, Info, Pencil } from 'lucide-react';
@@ -34,14 +34,14 @@ const getData = async () => {
   return { analyses, avg, isEmpty: false };
 };
 
-const History = async () => {
+const Mood = async () => {
   const { analyses, avg, isEmpty } = await getData();
 
   if (isEmpty) {
     return (
       <div className="p-2 sm:p-8 h-full">
         <h2 className="pb-2 text-2xl sm:text-3xl font-semibold tracking-tight">
-          History
+          Mood Chart
         </h2>
         <Separator />
         <div className="w-full h-full p-1 sm:px-8">
@@ -64,7 +64,7 @@ const History = async () => {
   return (
     <div className="p-2 sm:p-8 h-full">
       <h2 className="pb-2 text-2xl sm:text-3xl font-semibold tracking-tight">
-        History
+        Mood Chart
       </h2>
       <Separator />
       <div>
@@ -90,10 +90,10 @@ const History = async () => {
         </h3>
       </div>
       <div className="h-full w-full mb-10">
-        <HistoryChart data={analyses} />
+        <MoodChart data={analyses} />
       </div>
     </div>
   );
 };
 
-export default History;
+export default Mood;

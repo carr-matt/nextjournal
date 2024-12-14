@@ -12,7 +12,7 @@ interface DashboardLayoutProps {
 
 const links = [
   { name: 'Journal', href: '/journal' },
-  { name: 'History', href: '/history' },
+  { name: 'Mood Chart', href: '/chart' },
   { name: 'Home', href: '/' },
 ];
 
